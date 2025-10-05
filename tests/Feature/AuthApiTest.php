@@ -41,7 +41,7 @@ it('fails to login with invalid credentials', function () {
 
 it('fails to login with non-existent mobile', function () {
     $response = $this->postJson('/api/auth/login', [
-        'mobile' => '9123456789',
+        'mobile' => '9876543210',
         'password' => 'password123',
     ]);
 
