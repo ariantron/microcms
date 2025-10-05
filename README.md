@@ -86,6 +86,12 @@ docker-compose exec app php artisan storage:link
 
 All endpoints except login require JWT authentication.
 
+### API Documentation
+
+A Postman collection is included in the project for API testing and documentation:
+- **File**: `postman.json`
+- **Import**: Import this file into Postman to access all API endpoints
+
 ## Docker
 
 This project is fully containerized with Docker and includes:
