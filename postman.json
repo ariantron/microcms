@@ -1,0 +1,260 @@
+{
+	"info": {
+		"_postman_id": "65f81e7a-76bd-428c-bfbe-a2de261fdaf1",
+		"name": "MicroCMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43059122"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobile\": \"9128780331\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login user with mobile number and password"
+					},
+					"response": []
+				}
+			],
+			"description": "Authentication endpoints for user login"
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get User Posts",
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users/{{user_id}}/posts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}",
+								"posts"
+							]
+						},
+						"description": "Get all posts for a specific user (requires authentication)"
+					},
+					"response": []
+				}
+			],
+			"description": "User-related endpoints"
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "Update Profile Image",
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "profile_image",
+									"type": "file",
+									"src": "C:\\Users\\Moslem\\Pictures\\Screenshots\\Screenshot 2025-08-21 134550.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/profile/image",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"image"
+							]
+						},
+						"description": "Update user profile image (requires authentication)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Profile Image",
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/profile/image",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"image"
+							]
+						},
+						"description": "Delete user profile image (requires authentication)"
+					},
+					"response": []
+				}
+			],
+			"description": "Profile management endpoints"
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Get Single Post",
+					"protocolProfileBehavior": {
+						"followRedirects": true,
+						"disableUrlEncoding": false,
+						"disableCookies": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/posts/{{post_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"{{post_id}}"
+							]
+						},
+						"description": "Get a single post by ID (requires authentication)"
+					},
+					"response": []
+				}
+			],
+			"description": "Post-related endpoints"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAiLCJpYXQiOjE3NTk2MzAzNzQsImV4cCI6MTc1OTcxNjc3NCwic3ViIjoiMDE5OWIwNTYtNGUzMy03MjAzLTliNWUtMTFiYzFmYTMzMDFjIiwidXNlciI6eyJpZCI6IjAxOTliMDU2LTRlMzMtNzIwMy05YjVlLTExYmMxZmEzMzAxYyIsIm5hbWUiOiJEYW5pZWwgSUlJIiwibW9iaWxlIjoiOTEyODc4MDMzMSIsImlzX2FjdGl2ZSI6dHJ1ZX19.8DkLIdLYsEr75oD9HVICcRA7xjK2QWVY0jtSFF4B89I",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": ""
+		},
+		{
+			"key": "user_id",
+			"value": ""
+		},
+		{
+			"key": "post_id",
+			"value": ""
+		}
+	]
+}

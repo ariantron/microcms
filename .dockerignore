@@ -1,0 +1,53 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Node modules (not needed for this project)
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.testing
+docker.env
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+storage/logs/*
+
+# Cache
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+bootstrap/cache/*
+
+# Testing
+tests/
+phpunit.xml
+.phpunit.result.cache
+
+# Documentation
+README.md
+*.md
+
+# Temporary files
+*.tmp
+*.temp
