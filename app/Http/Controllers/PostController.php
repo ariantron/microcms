@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\PaginationHelper;
 use App\Models\Post;
 use App\Services\PostService;
 use Illuminate\Http\Request;
@@ -14,6 +15,22 @@ class PostController extends Controller
     public function __construct(PostService $postService)
     {
         $this->postService = $postService;
+    }
+
+    /**
+     * Get paginated posts.
+     */
+    public function index(Request $request)
+    {
+        // Extract pagination parameters using helper
+        ['per_page' => $perPage, 'page' => $page] = PaginationHelper::getPaginationFromRequest($request);
+
+        $response = $this->postService->getPosts($perPage, $page);
+
+        return $this->respond(
+            $response,
+            $response->success ? Response::HTTP_OK : Response::HTTP_INTERNAL_SERVER_ERROR
+        );
     }
 
     /**

@@ -25,5 +25,6 @@ Route::middleware(AuthMiddleware::class)->group(function () {
     Route::post('/profile/image', [UserController::class, 'updateProfileImage'])->name('profile.image.set');
     Route::delete('/profile/image', [UserController::class, 'deleteProfileImage'])->name('profile.image.delete');
     Route::get('/users/{user}/posts', [UserController::class, 'posts'])->name('users.posts')->where('user', uuid7Regex());
+    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
     Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')->where('post', uuid7Regex());
 });

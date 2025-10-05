@@ -204,6 +204,40 @@
 						"description": "Get a single post by ID (requires authentication)"
 					},
 					"response": []
+				},
+				{
+					"name": "Get All Posts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/posts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"description": "Post-related endpoints"

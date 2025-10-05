@@ -79,12 +79,63 @@ docker-compose exec app php artisan storage:link
 ## API Endpoints
 
 - `POST /api/auth/login` - User authentication
+- `GET /api/posts` - Get paginated posts
 - `GET /api/posts/{id}` - Get single post
 - `GET /api/users/{id}/posts` - Get user posts
 - `POST /api/profile/image` - Update profile image
 - `DELETE /api/profile/image` - Delete profile image
 
 All endpoints except login require JWT authentication.
+
+### Pagination
+
+The posts endpoints support pagination with the following query parameters:
+- `per_page` - Number of posts per page (default: 12, max: 50)
+- `page` - Page number (default: 1)
+
+**Example:**
+```
+GET /api/posts?per_page=5&page=2
+```
+
+**Response includes pagination metadata:**
+```json
+{
+  "success": true,
+  "data": {
+    "posts": [ ... ],
+    "pagination": {
+      "current_page": 2,
+      "last_page": 4,
+      "per_page": 5,
+      "total": 18,
+      "from": 6,
+      "to": 10,
+      "has_more_pages": true
+    }
+  }
+}
+```
+
+### Pagination Helper
+
+The project includes a reusable `PaginationHelper` class for consistent pagination across the application:
+
+**Available Methods:**
+- `validatePagination($perPage, $page)` - Validate and normalize pagination parameters
+- `getPaginationFromRequest($request, $defaultPerPage)` - Extract pagination from HTTP request
+- `formatPaginationMeta($paginator)` - Format pagination metadata for API response
+- `createPaginationResponse($paginator, $dataKey)` - Create complete pagination response
+
+**Usage Example:**
+```php
+// In Controller
+['per_page' => $perPage, 'page' => $page] = PaginationHelper::getPaginationFromRequest($request, 12);
+
+// In Service
+['per_page' => $perPage, 'page' => $page] = PaginationHelper::validatePagination($perPage, $page);
+$data = PaginationHelper::createPaginationResponse($paginator, 'posts');
+```
 
 ### API Documentation
 

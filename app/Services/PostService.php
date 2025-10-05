@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Helpers\PaginationHelper;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Models\PostView;
@@ -13,6 +14,37 @@ use Throwable;
 
 class PostService
 {
+    /**
+     * Get paginated posts.
+     */
+    public function getPosts(int $perPage = 12, int $page = 1): ServiceResponse
+    {
+        try {
+            // Validate pagination parameters using helper
+            ['per_page' => $perPage, 'page' => $page] = PaginationHelper::validatePagination($perPage, $page);
+
+            // Get paginated posts with user relationship
+            $posts = Post::with('user')
+                ->orderBy('created_at', 'desc')
+                ->paginate(
+                    perPage: $perPage,
+                    page: $page,
+                );
+
+            // Create response data using helper
+            $responseData = PaginationHelper::createPaginationResponse($posts, 'posts');
+            $responseData['posts'] = PostResource::collection($posts);
+
+            return ServiceResponse::success($responseData);
+        } catch (Exception $e) {
+            $message = 'Failed to retrieve posts';
+            Log::error($message, [
+                'exception' => $e->getMessage(),
+            ]);
+            return ServiceResponse::failed([$message]);
+        }
+    }
+
     /**
      * Get a single post.
      */
