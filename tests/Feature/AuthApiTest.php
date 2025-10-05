@@ -7,14 +7,14 @@ uses(RefreshDatabase::class);
 
 beforeEach(function () {
     $this->user = User::factory()->create([
-        'mobile' => '+1234567890',
+        'mobile' => '9123456789',
         'password' => bcrypt('password123'),
     ]);
 });
 
 it('can login with valid credentials', function () {
     $response = $this->postJson('/api/auth/login', [
-        'mobile' => '+1234567890',
+        'mobile' => '9123456789',
         'password' => 'password123',
     ]);
 
@@ -31,7 +31,7 @@ it('can login with valid credentials', function () {
 
 it('fails to login with invalid credentials', function () {
     $response = $this->postJson('/api/auth/login', [
-        'mobile' => '+1234567890',
+        'mobile' => '9123456789',
         'password' => 'wrongpassword',
     ]);
 
@@ -41,7 +41,7 @@ it('fails to login with invalid credentials', function () {
 
 it('fails to login with non-existent mobile', function () {
     $response = $this->postJson('/api/auth/login', [
-        'mobile' => '+9999999999',
+        'mobile' => '9123456789',
         'password' => 'password123',
     ]);
 
@@ -70,7 +70,7 @@ it('validates mobile number format', function () {
 
 it('validates password minimum length', function () {
     $response = $this->postJson('/api/auth/login', [
-        'mobile' => '+1234567890',
+        'mobile' => '9123456789',
         'password' => '123',
     ]);
 
